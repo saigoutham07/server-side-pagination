@@ -1,0 +1,235 @@
+<div class="configurations-datatable table-settings"
+    [ngClass]="{'with-rows': (bodyContent && bodyContent.length > 0), 'no-table-rows': (bodyContent && bodyContent.length === 0)}">
+    <table datatable [hidden]="!showTable" [dtOptions]="dtOptions" class="table"
+        *ngIf="headerContent && headerContent.length > 0">
+        <thead>
+            <tr>
+                <ng-container *ngIf="settings.radioButton?.show">
+                    <th class="checkbox-header">
+                        {{settings.radioButton.title}}
+                        <label *ngIf="settings.radioButton?.showSelectAll"
+                            class="checkbox form-check-label text-left table-checkbox ml-1 mb-4">
+                            <span class="checkbox-span" [hidden]="settings.radioButton?.hidden">
+                                <input type="checkbox" (ngModelChange)="changeCheckBoxAll($event)"
+                                    [(ngModel)]="settings.radioButton.checkAllValue">
+                                <span class="checkmark"></span>
+                            </span>
+                        </label>
+                    </th>
+                </ng-container>
+                <th class="table-coloum-serial-no-header" *ngIf="settings.showSerialNumber"></th>
+                <th *ngFor="let th of headerContent" [ngClass]="th.classList">
+                    <span class="table-col-title">{{th.label}}</span>
+                    <span (click)="$event.stopPropagation();" class="search" *ngIf="dtOptions.columnSearch">
+                        <ng-container>
+                            <input [class.invisible]="!(!settings.columnSearch.searchExceptions ||
+                            (settings.columnSearch.searchExceptions.indexOf(th.key)===-1))" type="text"
+                                class="form-control" (focus)="$event.stopPropagation()" placeholder="Search"
+                                [(ngModel)]="columnSearchModel[th.key]"
+                                (ngModelChange)="search(columnSearchModel[th.key])" />
+                        </ng-container>
+                    </span>
+                </th>
+                <ng-container *ngIf="dtOptions.tableActions?.show">
+                    <th class="table-header"></th>
+                </ng-container>
+            </tr>
+        </thead>
+        <tbody *ngIf="bodyContent && bodyContent.length > 0" [ngClass]="{'table-processing': tableProcessing}">
+            <tr *ngFor="let tr of bodyContent; let body_index = index" [ngClass]="tr.className">
+                <ng-container *ngIf="settings.radioButton?.show">
+                    <td>
+                        <label *ngIf="!tr[settings.radioButton.hiddenKey]"
+                            class="checkbox form-check-label text-left table-checkbox ml-1"
+                            [ngClass]="{'ph-item color-light-gray text-hide cell-processing': tableProcessing}">
+                            <span class="checkbox-span" [hidden]="settings.radioButton?.hidden">
+                                <input type="checkbox" (ngModelChange)="changeCheckBox($event, i, tr)"
+                                    [(ngModel)]="tr[settings.radioButton.key]">
+                                <span class="checkmark"></span>
+                            </span>
+                        </label>
+                    </td>
+                </ng-container>
+                <td class="table-coloum-serial-no-body text-center" *ngIf="settings.showSerialNumber">
+                    <span *ngIf="dataTablesParameters"
+                        [ngClass]="{'ph-item color-light-gray text-hide': tableProcessing}">
+                        {{dataTablesParameters.start + body_index + 1}}
+                    </span>
+                </td>
+                <td *ngFor="let th of headerContent; let head_index = index" [ngClass]="th.classList"
+                    class="table-cell {{settings.rowClick? 'row-click-active': ''}}"
+                    (click)="settings.rowClick && rowClick(tr)">
+                    <ng-container *ngIf="!th.editable">
+                        <span [ngClass]="{'ph-item color-light-gray text-hide': tableProcessing}"
+                            *ngIf="th.icon && settings.columnConditions && settings.columnConditions.icons && settings.columnConditions.icons[th.key] && settings.columnConditions.icons[th.key][tr[th.key]]">
+                            <i aria-hidden="true" [ngClass]="{'invisible': tableProcessing}"  [ngbTooltip]="settings.columnConditions.icons[th.key][tr[th.key]].tooltip" container="body"
+                                class="{{settings.columnConditions.icons[th.key][tr[th.key]].icon + ' ' + settings.columnConditions.icons[th.key][tr[th.key]].class}}">
+                            </i>
+                        </span>
+                        <span *ngIf="th.altText" [ngClass]="{'ph-item color-light-gray text-hide': tableProcessing}">
+                            <ng-container
+                                *ngIf="settings.columnConditions && settings.columnConditions.altText && settings.columnConditions.altText[th.key] && settings.columnConditions.altText[th.key][tr[th.key]] else altTextFail">
+                                {{settings.columnConditions.altText[th.key][tr[th.key]].label}}
+                            </ng-container>
+                            <ng-template #altTextFail>
+                                {{tr[th.key]}}
+                            </ng-template>
+                        </span>
+                        <span *ngIf="!th.icon && !th.altText" class="spnDetails"
+                            [ngClass]="{'ph-item color-light-gray text-hide': tableProcessing}">
+                            <ng-container
+                                *ngIf="(th.clickAble && th.clickAble.show) || (settings.clickableColumns && settings.clickableColumns.show) else plainText">
+                                <ng-container *ngIf="th.clickAble else clickableColumnCheck">
+                                    <ng-container [ngSwitch]="th.clickAble.type">
+                                        <ng-container *ngSwitchCase="'numericCondition'">
+                                            <ng-container *ngIf="th.clickAble.condition.sign === '>' else lessThan">
+                                                <ng-container
+                                                    *ngIf="tr[th.clickAble.condition.key] > th.clickAble.condition.value; then clickableCell else plainText">
+                                                </ng-container>
+                                            </ng-container>
+                                            <ng-template #lessThan>
+                                                <ng-container
+                                                    *ngIf="tr[th.clickAble.condition.key] < th.clickAble.condition.value; then clickableCell else plainText">
+                                                </ng-container>
+                                            </ng-template>
+                                        </ng-container>
+
+
+
+                                        <ng-container *ngSwitchCase="'alphabetCondition'">
+                                            <ng-container *ngIf="th.clickAble.condition.sign === '!=' else plainText">
+                                                <ng-container
+                                                    *ngIf="tr[th.clickAble.condition.key] != th.clickAble.condition.value; then clickableCell else plainText">
+                                                </ng-container>
+                                            </ng-container>
+                                        </ng-container>
+
+
+
+                                        <ng-container *ngSwitchCase="'boolean'">
+                                            <ng-container
+                                                *ngIf="(tr[th.clickAble.condition.key]); then clickableCell else plainText">
+                                            </ng-container>
+                                        </ng-container>
+                                        <ng-container *ngSwitchDefault>
+                                            <ng-container
+                                                *ngIf="(tr[th.clickAble.condition.key] == th.clickAble.condition.value); then clickableCell else plainText">
+                                            </ng-container>
+                                        </ng-container>
+                                    </ng-container>
+                                </ng-container>
+                                <ng-template #clickableColumnCheck>
+                                    <ng-container
+                                        *ngIf="(settings.clickableColumns.list && settings.clickableColumns.list.indexOf(th.key) > -1) then clickableCell else plainText">
+                                    </ng-container>
+                                </ng-template>
+                            </ng-container>
+                            <ng-template #plainText>
+                                <span [innerHtml]="tr[th.key]" *ngIf="th.innerHtml" class="innter-html-content"></span>
+                                <span class="plan-text" *ngIf="!th.innerHtml">
+                                    {{tr[th.key]}}
+                                </span>
+                            </ng-template>
+                            <!-- th.clickAble.condition -->
+                            <ng-template #clickableCell>
+                                <span class="active clickable-element" [ngClass]="settings?.clickableColumns?.class"
+                                    (click)="cellClick(tr,th)">
+                                    <ng-container
+                                        *ngIf="th.clickAble?.condition?.altText?.value ; then clickableWithAlt else clickableWithoutAlt">
+                                    </ng-container>
+                                    <ng-template #clickableWithAlt>
+                                        {{th.clickAble.condition.altText.value}}
+                                    </ng-template>
+
+                                    <ng-template #clickableWithoutAlt>
+                                        {{tr[th.key]}}
+                                    </ng-template>
+                                </span>
+                            </ng-template>
+                        </span>
+                    </ng-container>
+                    <ng-container *ngIf="th.editable">
+                        <span [ngSwitch]="th.type"
+                            [ngClass]="{'ph-item color-light-gray text-hide cell-processing': tableProcessing}">
+                            <ng-container *ngSwitchCase="'number'">
+                                <input type="number" [(ngModel)]="tr[th.key]" class="form-control"
+                                    [attr.disabled]="(tr['disabled'] || th['disabled'])? '': null">
+                            </ng-container>
+                            <ng-container *ngSwitchCase="'text'">
+                                <input type="text" [(ngModel)]="tr[th.key]" class="form-control"
+                                    [attr.disabled]="(tr['disabled'] || th['disabled'])? '': null">
+                            </ng-container>
+                            <span *ngSwitchCase="'select'"
+                                [ngClass]="{'ph-item color-light-gray text-hide': tableProcessing}">
+                                <select [(ngModel)]="tr[th.key]" class="form-control"
+                                    [attr.disabled]="(tr['disabled'] || th['disabled'])? '': null">
+                                    <option *ngFor="let opt of th.options" [value]="opt.value">{{opt.label}}</option>
+                                </select>
+                            </span>
+                            <span *ngSwitchCase="'datePicker'">
+                                <input [owlDateTimeTrigger]="dt" [owlDateTime]="dt"
+                                    class="form-control date-field-diasble" [(ngModel)]="tr[th.key]" selectMode='single'
+                                    readonly [attr.disabled]="(tr['disabled'] || th['disabled'])? '': null">
+                                <owl-date-time [pickerType]="'calendar'" #dt></owl-date-time>
+                            </span>
+                            <ng-container *ngSwitchDefault>
+                                Invalid Format
+                            </ng-container>
+                        </span>
+                    </ng-container>
+                </td>
+                <ng-container *ngIf="dtOptions.tableActions?.show">
+                    <td [style.width.px]="dtOptions.tableActions.width" class="table-cell-action">
+                        <ng-container *ngFor="let action of dtOptions.tableActions?.actionButtons">
+                            <span *ngIf="!tr[action.hideOn]"
+                                [ngClass]="{'ph-item color-light-gray text-hide processing-action': tableProcessing}">
+                                <a href="javascript:void(0)"
+                                    class="label-action {{action.disabled || dtOptions.tableActions.disabled? 'disabled': ''}}"
+                                    [ngClass]="action.class" *ngIf="action.onlyText"
+                                    (click)="tableAction(tr, action.type)">{{action.text}}</a>
+                                <button *ngIf="!action.onlyText" class="btn btn-sm" [ngClass]="action.class"
+                                    (click)="tableAction(tr, action.type)"
+                                    [attr.disabled]="(action.disabled || dtOptions.tableActions.disabled)? '': null">
+                                    {{action.text}} <i aria-hidden="true" class="fa" [ngClass]="action.icon"></i>
+                                </button>
+                            </span>
+                        </ng-container>
+                    </td>
+                </ng-container>
+            </tr>
+        </tbody>
+    </table>
+    <div class="empty-state" *ngIf="emptyTableNotify && !tableProcessing">
+        <label class="records-available">No records to display</label><br>
+        <span *ngIf="settings?.emptyDataTemplate?.show">
+            <label>{{settings?.emptyDataTemplate?.message}}</label><br>
+            <button *ngIf="settings.emptyDataTemplate.filterBtn.show" class="btn btn-secondary filter-data"
+                (click)="toogleSidebar()">{{settings.emptyDataTemplate.filterBtn.label}}</button>
+        </span>
+    </div>
+    <button type="button" style="display:none" class="btn btn-demo tableFilterCommonBtn" data-toggle="modal"
+        [attr.data-target]="'#'+ settings.tableId" [attr.id]="'toggleSidebar_'+ settings.tableId">
+    </button>
+    <div class="modal right fade" [attr.id]="settings.tableId" role="dialog" aria-labelledby="myModalLabel2">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title filter-title" id="myModalLabel2">Filter by</h4>
+                    <button type="button" class="close filterCloseBtn" data-dismiss="modal" aria-label="Close"
+                        [attr.id]="'filterCloseIcon_' + settings.tableId"><span
+                            aria-hidden="false">&times;</span></button>
+                </div>
+
+                <div class="modal-body filter-body">
+                    <app-simple-dfm class="simple-dfm" [savedData]="formData"
+                        (selectFieldChange)="filterSelectFieldChange($event)" [parentData]="parentData"
+                        *ngIf="metaData.length > 0" [metaData]="metaData">
+                    </app-simple-dfm>
+                </div>
+                <div class="modal-footer" *ngIf="metaData.length > 0">
+                    <button class="btn btn-primary col-md-12" (click)="filterSubmit()">Apply</button>
+                </div>
+            </div><!-- modal-content -->
+        </div><!-- modal-dialog -->
+    </div>
+</div>

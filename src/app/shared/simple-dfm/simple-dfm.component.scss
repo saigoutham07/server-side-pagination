@@ -1,0 +1,23 @@
+.check-box-label {
+  display: block;
+}
+.fa-calendar {
+  position: absolute;
+  right: 20px;
+  top: 40px;
+}
+.date-picker {
+  background-color: #fff !important;
+}
+.form-field{
+  padding-top: 10px;
+}
+::ng-deep .cdk-overlay-container {
+  position: fixed; 
+  z-index: 1100;
+}
+.date-field-diasble.form-control:disabled, .date-field-diasble.form-control[readonly] {
+  background-color: #f6f7f9;
+  opacity: 1;
+  cursor: pointer !important;
+}

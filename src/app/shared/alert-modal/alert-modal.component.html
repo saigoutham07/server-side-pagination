@@ -1,0 +1,42 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">{{inputInfo.title? inputInfo.title : 'Message'}}</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body modal-data-responsive">
+  <div>
+    <div class="col-md-12 p-2" style="display: inline-block;" *ngIf="inputInfo">
+      <div class="row">
+        <div class="col-md-2 text-right" *ngIf="inputInfo.icon">
+          <i aria-hidden="true" [ngClass]="iconType"></i>
+        </div>
+        <div class="col-md-8 p-0" [ngClass]="{true:'col-md-8',false:'col-md-12'}[inputInfo.icon]"
+          *ngIf="inputInfo.data">
+          <ul class="message-class p-0" [ngClass]="inputInfo.data.length == 1 ? 'alert-body':''"
+            *ngIf="inputInfo.data.length > 0">
+            <li *ngFor="let info of inputInfo.data;">
+              {{info}}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer p-0">
+  <div class="col-md-12 p-0">
+    <button *ngIf="inputInfo.buttons?.length == 0" class="btn btn-primary col-md-12 btn-modal"
+      (click)="activeModal.close('Save click');" ngbAutofocus>OK</button>
+    <ng-container *ngFor="let btnInfo of inputInfo.buttons; let this_index = index">
+      <ng-container *ngIf="(this_index+1) === inputInfo.buttons.length else noFocusBtn">
+        <button class="btn btn-modal col-md-{{btnInfo.cols || 6}}" [ngClass]="btnInfo.class"
+          (click)="activeModal.close(btnInfo.type);" ngbAutofocus>{{btnInfo.label}}</button>
+      </ng-container>
+      <ng-template #noFocusBtn>
+        <button class="btn btn-modal col-md-{{btnInfo.cols || 6}}" [ngClass]="btnInfo.class"
+          (click)="activeModal.close(btnInfo.type);">{{btnInfo.label}}</button>
+      </ng-template>
+    </ng-container>
+  </div>
+</div>
