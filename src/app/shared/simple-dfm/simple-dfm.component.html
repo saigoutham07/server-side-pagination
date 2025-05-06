@@ -1,0 +1,142 @@
+<div class="row">
+  <ng-container *ngFor="let field of metaData">
+    <ng-container *ngIf="!field.hidden">
+      <div class="col-md-{{field.columns || 4}} form-field">
+        <!-- text -->
+        <label *ngIf="field.type != 'label' && field.type != 'checkbox'">{{field.name}}({{field.caption}})<span
+            *ngIf="field.required === true" class="mand-field coco-cola-theme-color">*</span>
+        </label>
+        <ng-container *ngIf="field.type === 'text'">
+          <input type="text" class="form-control" [placeholder]="field.placeholder"
+            [disabled]="parentData.disable || field.readonly" [(ngModel)]="savedData[field.key]"
+            [ngClass]="validateField(savedData[field.key], field.type) &&  field.required === true? parentData.error_cls: ''"
+            [ngStyle]="{'margin-top':field.name ? '':'8px'}"
+            [attr.maxlength]="field.maxCharlength ? field.maxCharlength : null">
+        </ng-container>
+        <!-- number -->
+        <ng-container *ngIf="field.type === 'number'">
+          <input type="number" class="form-control" [min]="field.min" [placeholder]="field.placeholder"
+            [disabled]="parentData.disable" [(ngModel)]="savedData[field.key]"
+            [ngClass]="validateField(savedData[field.key], field.type) &&  field.required === true? parentData.error_cls: ''"
+            [ngStyle]="{'margin-top':field.name ? '':'8px'}"
+            [attr.maxlength]="field.maxCharlength ? field.maxCharlength : null">
+        </ng-container>
+        <!--textbox number only -->
+        <ng-container *ngIf="field.type === 'textNumber'">
+          <input type="text" class="form-control" [placeholder]="field.placeholder"
+            [disabled]="parentData.disable || field.readonly" [(ngModel)]="savedData[field.key]"
+            [ngClass]="validateField(savedData[field.key], field.type) &&  field.required === true? parentData.error_cls: ''"
+            [ngStyle]="{'margin-top':field.name ? '':'8px'}" (keypress)="textNumberOnly($event)"
+            (paste)="pasteEventtextNumber($event)" [attr.maxlength]="field.maxCharlength ? field.maxCharlength : null">
+        </ng-container>
+        <!-- email -->
+        <ng-container *ngIf="field.type === 'email'">
+          <input type="email" class="form-control" [placeholder]="field.placeholder" [disabled]="parentData.disable"
+            [(ngModel)]="savedData[field.key]"
+            [ngClass]="validateField(savedData[field.key], field.type) &&  field.required === true? parentData.error_cls: ''"
+            [ngStyle]="{'margin-top':field.name ? '':'8px'}">
+        </ng-container>
+        <!-- password -->
+        <ng-container *ngIf="field.type === 'password'">
+          <input type="password" class="form-control" [placeholder]="field.placeholder" [disabled]="parentData.disable"
+            [(ngModel)]="savedData[field.key]"
+            [ngClass]="validateField(savedData[field.key], field.type) &&  field.required === true? parentData.error_cls: ''"
+            [ngStyle]="{'margin-top':field.name ? '':'8px'}">
+        </ng-container>
+        <!-- grouped Text -->
+        <ng-container *ngIf="field.type === 'groupedText'">
+          <div class="row">
+            <div *ngFor="let input of field.inputs" class="col-md-{{input.columns}}">
+              <input [type]="input.type" class="form-control" [placeholder]="input.placeholder"
+                [disabled]="parentData.disable" [(ngModel)]="savedData[input.key]">
+            </div>
+          </div>
+        </ng-container>
+        <!-- date -->
+        <ng-container *ngIf="field.type === 'date'">
+          <input [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" [selectMode]="field.selectMode|| 'range'" 
+            [disabled]="parentData.disable" [(ngModel)]="savedData[field.key]" rangeSeparator="To" readonly
+            placeholder="Date Time" class="form-control date-picker date-field-diasble"
+            [ngClass]="dateValidation(savedData[field.key], field) &&  field.required === true? parentData.error_cls: ''">
+          <i aria-hidden="true" class="fa fa-calendar" [owlDateTimeTrigger]="dt1"></i>
+          <owl-date-time #dt1 [pickerType]="field.pickerType || 'both'"></owl-date-time>
+        </ng-container>
+
+        <!-- select -->
+        <ng-container *ngIf="field.type.toLowerCase() === 'select'">
+          <ng-select [items]="field.options" (ngModelChange)="selectChange($event,field)" [appendTo]="container"
+            [(ngModel)]="savedData[field.key]" [placeholder]="field.placeholder" [disabled]="parentData.disable || field.childDisabled"
+            [bindValue]="field.bindValue" [bindLabel]="field.bindLabel" [clearable]="field.clearable? true : false"
+            [ngClass]="validateField(savedData[field.key], field.type) &&  field.required === true? parentData.error_cls: ''">
+            <ng-container *ngIf="field?.LabelView">
+              <ng-template ng-option-tmp let-item="item">{{item.label +"-"+item.value}}
+              </ng-template>
+            </ng-container>
+            <ng-container *ngIf="field?.selectedView">
+              <ng-template ng-label-tmp let-item="item">{{item.label +"-"+item.value}}
+              </ng-template>
+            </ng-container>
+          </ng-select>
+        </ng-container>
+        <!-- multiselect -->
+        <ng-container *ngIf="field.type.toLowerCase() === 'multiselect'">
+          <ng-select [multiple]="true" [items]="field.options" (ngModelChange)="selectChange($event,field.key)"
+            [(ngModel)]="savedData[field.key]" [placeholder]="field.placeholder" [disabled]="parentData.disable"
+            [bindValue]="field.bindValue" [bindLabel]="field.bindLabel" [clearable]="field.clearable? true : false"
+            [ngClass]="validateField(savedData[field.key], field.type) &&  field.required === true? parentData.error_cls: ''">
+          </ng-select>
+        </ng-container>
+        <!-- multiselect all option check-->
+        <ng-container *ngIf="field.type.toLowerCase() === 'multiselectwithall'">
+          <ng-select [multiple]="true" [items]="field.options" (add)="selectChangeMultiple($event,field, 'add')"
+          (remove)="selectChangeMultiple($event,field,'remove')"
+            [(ngModel)]="savedData[field.key]" [placeholder]="field.placeholder" [disabled]="parentData.disable"
+            [bindValue]="field.bindValue" [bindLabel]="field.bindLabel" [clearable]="field.clearable? true : false"
+            [ngClass]="validateField(savedData[field.key], field.type) &&  field.required === true? parentData.error_cls: ''"
+            >
+          </ng-select>
+        </ng-container>
+        <!-- CheckBox -->
+        <ng-container *ngIf="field.type === 'checkbox'">
+          <label class="checkbox form-check-label text-left w-100 mt-3 mr-3">{{field.name}}<span
+              *ngIf="field.required === true" class="mand-field coco-cola-theme-color">*</span>
+            <input type="checkbox" [(ngModel)]="savedData[field.key]" [disabled]="field.disabled"
+              [ngClass]="validateField(savedData[field.key], field.type) &&  field.required === true? parentData.error_cls: ''">
+            <span class="checkmark"></span>
+          </label>
+        </ng-container>
+        <ng-container *ngIf="field.type === 'cus-date'">
+          <input type="text" class="form-control" [placeholder]="field.placeholder"
+            [disabled]="parentData.disable || field.readonly" [(ngModel)]="savedData[field.key]"
+            [ngClass]="validateField(savedData[field.key], field.type) &&  field.required === true? parentData.error_cls: ''">
+        </ng-container>
+        <ng-container *ngIf="field.type === 'heading'">
+          <h6>{{field.title}}</h6>
+        </ng-container>
+        <!-- Text Area -->
+        <ng-container *ngIf="field.type === 'textarea'">
+          <textarea [placeholder]="field.placeholder" [(ngModel)]="savedData[field.key]" class="form-control"
+            [disabled]="parentData.disable || field.readonly"
+            [ngClass]="validateField(savedData[field.key], field.type) &&  field.required === true? parentData.error_cls: ''"></textarea>
+        </ng-container>
+        <!-- label -->
+        <ng-container *ngIf="field.type === 'label'">
+          <h4 [ngClass]="field.class || 'theme-text'">{{field.name}}</h4>
+        </ng-container>
+
+        <!-- checkbox-list -->
+        <ng-container *ngIf="field.type === 'checkbox-list'">
+          <app-checkbox-list [options]="field.options" [config]="field.config"
+            (action)="onChangCheckBoxList($event, field.key)"></app-checkbox-list>
+        </ng-container>
+
+        <label class="error-msg"
+          *ngIf="validateField(savedData[field.key], field.type) &&  field.required === true && parentData.formSubmitted">
+          {{field.errorMsg || (field.name + ' is required')}}</label>
+        <label class="error-msg"
+          *ngIf="dateValidation(savedData[field.key], field) && parentData.formSubmitted && field.validateMsg">
+          {{field.validateMsg}}</label>
+      </div>
+    </ng-container>
+  </ng-container>
+</div>

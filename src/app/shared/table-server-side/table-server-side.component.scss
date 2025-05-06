@@ -1,0 +1,349 @@
+// @import url(../../../../node_modules/@fortawesome/angular-fontawesome/angular-fontawesome.d.ts)
+.configurations-datatable {
+  padding: 0rem 0.5rem;
+}
+
+.text-transform-up {
+  text-transform: uppercase;
+}
+
+.text-transform-lo {
+  text-transform: lowercase;
+}
+
+.table-col-title {
+  font-family: "Roboto-Bold";
+  font-size: 12px;
+  padding: 7px 0px;
+}
+
+table {
+  width: 100% !important;
+  margin-bottom: 8px;
+  padding-top: 0.5rem;
+  border: 0px !important;
+  thead {
+    tr {
+      background: #eeeeee;
+      .table-coloum-serial-no-header {
+        min-width: 40px !important;
+        width: 40px !important;
+      }
+      .checkbox-header {
+        min-width: 30px !important;
+        width: 30px !important;
+      }
+      th {
+        &:focus {
+          outline: none;
+        }
+        input {
+          background: transparent;
+          border: 0px;
+          border-bottom: 1px solid gray;
+          border-radius: 0px;
+          box-shadow: none;
+          padding-left: 0px;
+          padding-right: 0px;
+        }
+
+        .search {
+          position: relative;
+          i {
+            position: absolute;
+            top: 25%;
+            opacity: 0.3;
+            left: 85%;
+            pointer-events: none;
+          }
+        }
+      }
+    }
+  }
+
+  tbody {
+    td.table-coloum-serial-no-header {
+      min-width: 40px !important;
+      width: 40px !important;
+    }
+    td {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 12rem;
+      border-bottom: 1px solid #dee2e6 !important;
+      border-top: 0px !important;
+      padding: 6px;
+      padding-left: 9px !important;
+      label.table-checkbox {
+        min-height: 20px;
+      }
+      a.label-action.disabled {
+        /* Make the disabled links grayish*/
+        color: gray;
+        /* And disable the pointer events */
+        pointer-events: none;
+      }
+    }
+    tr:hover {
+      background: #eeeeee;
+      border: 1px solid #eeeeee;
+      opacity: 1;
+      cursor: pointer;
+    }
+    .action {
+      min-width: 140px;
+      padding-left: 30px;
+      span {
+        color: #1a61d0;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+table.dataTable thead th {
+  padding: 8px;
+  border: none;
+  min-width: 130px;
+}
+
+// table.dataTable thead th {
+//   // padding-left: 5px !important;
+//   // padding-right: 12px !important;
+//   // padding-top: 0px !important;
+//   // padding-bottom: 10px !important;
+// }
+
+table.dataTable thead th:last-child {
+  border-left: 0px;
+}
+
+table.dataTable thead th:nth-last-child(2) {
+  border-right: 0px;
+}
+
+::ng-deep .odd {
+  display: none;
+}
+
+.dataTables_length {
+  display: inline;
+}
+
+.overlay-filter {
+  height: calc(100vh - 56px);
+  margin-top: 7rem;
+  background: #fff;
+  width: 20vw;
+  float: right;
+  overflow: hidden;
+}
+
+.overlay {
+  position: fixed;
+  display: none;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+  cursor: pointer;
+}
+
+.sidebar-section-fill {
+  -ms-flex: 1;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.card-reflow {
+  margin-bottom: 0;
+  display: block;
+  background-color: transparent;
+  box-shadow: none;
+}
+.card-body {
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  padding: 1rem;
+}
+.pb-1,
+.py-1 {
+  padding-bottom: 0.25rem !important;
+}
+
+.border-top {
+  border-top: 1px solid rgba(34, 34, 48, 0.1) !important;
+}
+
+.list-group {
+  border: 0;
+  box-shadow: 0 0 0 1px rgba(20, 20, 31, 0.05), 0 1px 3px 0 rgba(20, 20, 31, 0.15);
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+
+.card {
+  padding-left: 2rem;
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border-radius: 0.25rem;
+}
+
+// app-simple-dfm {
+//   overflow-x: hidden;
+//   height: 100vh;
+// }
+.simple-dfm {
+  overflow-x: hidden;
+  height: 100vh;
+}
+.remove-border {
+  background: unset !important;
+  border: unset;
+  border-bottom: 1px solid grey;
+  color: #ffffff;
+}
+
+.footer-navigator {
+  position: absolute;
+  bottom: 0px;
+  background-color: #eff2f3;
+  padding: 10px;
+}
+.for-submit {
+  width: 18%;
+  margin-left: 18px;
+}
+.btn-class {
+  margin-left: 1rem;
+}
+.table-settings {
+  margin-top: 1rem;
+}
+.table-header {
+  vertical-align: inherit;
+  min-width: 50px;
+}
+
+// ---------------------------
+// modal-body-css
+.modal-dialog {
+  height: calc(100% - 49px) !important;
+  bottom: 0 !important;
+  width: 320px !important;
+}
+
+.modal.left .modal-dialog,
+.modal.right .modal-dialog {
+  position: fixed;
+  margin: auto;
+  width: 350px;
+  height: 100%;
+  -webkit-transform: translate3d(0%, 0, 0);
+  -ms-transform: translate3d(0%, 0, 0);
+  -o-transform: translate3d(0%, 0, 0);
+  transform: translate3d(0%, 0, 0);
+}
+
+/*Right*/
+.modal.right.fade .modal-dialog {
+  right: 0px;
+  -webkit-transition: opacity 0.3s linear, right 0.3s ease-out;
+  -moz-transition: opacity 0.3s linear, right 0.3s ease-out;
+  -o-transition: opacity 0.3s linear, right 0.3s ease-out;
+  transition: opacity 0.3s linear, right 0.3s ease-out;
+}
+
+.modal.right.fade.in .modal-dialog {
+  right: 0;
+  bottom: 0;
+}
+/* ----- MODAL STYLE ----- */
+.modal-content {
+  border-radius: 0;
+  border: none;
+}
+
+.modal-header {
+  background: #ffffff;
+  border-bottom: 1px solid #e9ecef;
+  border-bottom-color: #eeeeee;
+  background-color: #fafafa;
+}
+/* ----- v CAN BE DELETED v ----- */
+body {
+  background-color: #78909c;
+}
+
+.demo-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+}
+.close {
+  opacity: unset !important;
+  color: black !important;
+}
+
+.active {
+  color: #dc1523;
+  text-decoration: underline;
+}
+
+.filter-body {
+  height: calc(100vh - 148px);
+  overflow-y: auto;
+}
+.modal-footer {
+  padding: 5px;
+}
+.invisible {
+  visibility: hidden;
+}
+.records-available {
+  color: lightgrey;
+  font-size: 25px !important;
+  font-size: 1.875rem !important;
+}
+.empty-state {
+  text-align: center;
+  padding: 130px;
+  display: block;
+}
+.filter-data {
+  margin-top: 5px;
+}
+.filter-title {
+  font-size: 18px;
+}
+.processing-action {
+  width: 10%;
+  float: left;
+  margin-right: 1rem;
+}
+.processing-action .label-action {
+  color: transparent !important;
+}
+.date-field-diasble.form-control:disabled,
+.date-field-diasble.form-control[readonly] {
+  background-color: white;
+  opacity: 1;
+  cursor: pointer !important;
+}

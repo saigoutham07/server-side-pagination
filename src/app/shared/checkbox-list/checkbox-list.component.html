@@ -1,0 +1,35 @@
+<div class="row">
+    <div class="col-md-12">
+        <input type="search" *ngIf="!config.hideFilter" [(ngModel)]="filterModal.label" class="form-control" name="checkbox_list_filter" placeholder="Search">
+        <div class="checkbox-list" *ngIf="config.selectAll && config.multiSelect">
+            <div class="list-group dropdown-data">
+                <div class="list-group-item">
+                    <span class="underline vendor-search cursor-pointer" (click)="checkUnCheckAll('select')">
+            Select All
+          </span> &nbsp;&nbsp;
+                    <span class="underline vendor-search cursor-pointer" (click)="checkUnCheckAll('unselect')">
+            De-Select All
+          </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="checkbox-list">
+            <div class="list-group dropdown-data">
+                <ng-container *ngIf="options.length >= 1; else noItems">
+                    <div class="check-list" [ngStyle]="{ 'height.px': (config.maxItems) * config.itemHeight, 'overflow-y': 'auto'}">
+                        <div class="list-group-item cus-check-list" *ngFor=" let item of options | filterBy: filterModal">
+                            <label class="checkbox form-check-label text-left w-100">{{item.label}}
+                <input type="checkbox" [(ngModel)]="item.selected" (ngModelChange)="onCheckItem($event, item)">
+                <span class="checkmark"></span>
+              </label>
+                        </div>
+                    </div>
+                </ng-container>
+                <ng-template #noItems>
+                    <div class="list-group-item cus-check-list">{{config.noItemsFound}}</div>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</div>

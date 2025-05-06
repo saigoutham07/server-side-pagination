@@ -1,0 +1,9 @@
+<div class="col-md-12 header-navigator">
+  <label class="header-text">Server Side Data Table</label>
+</div>
+<div class="col-md-12">
+  <app-table-server-side [settings]="tableSettings" [data]="tableData" (action)="performAction($event)"
+    [tableReloadEvent]="tableReloadSubject.asObservable()"
+    *ngIf="tableData && tableData.headerContent && tableData.headerContent.length > 0">
+  </app-table-server-side>
+</div>

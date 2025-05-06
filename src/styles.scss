@@ -1,0 +1,847 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import url(../src/assets/css/theme.min.css);
+@import url(../src/assets/css/open-iconic-bootstrap.min.css);
+@import url(../src/assets/css/fontawesome/css/all.css);
+@import url(../src/assets/css/radiobutton/pretty-checkbox.min.css);
+@import url(./assets/css/placeholder-loading.css);
+@import "~@ng-select/ng-select/themes/default.theme.css";
+@import "~ng-pick-datetime/assets/style/picker.min.css";
+// /adding new font family/
+@font-face {
+    font-family: "Roboto-Light";
+    /* Not used */
+    src: url("../src/assets/fonts/Roboto-Light.ttf");
+}
+
+@font-face {
+    font-family: "Roboto-Regular";
+    /* Most used */
+    src: url("../src/assets/fonts/Roboto-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Roboto-Medium";
+    /* Less used */
+    src: url("../src/assets/fonts/Roboto-Medium.ttf");
+}
+
+@font-face {
+    font-family: "Roboto-Bold";
+    /* Used to highlight as well as indicate selected text */
+    src: url("../src/assets/fonts/Roboto-Bold.ttf");
+}
+
+@font-face {
+    font-family: "Roboto-Black";
+    /* Not used */
+    src: url("../src/assets/fonts/Roboto-Black.ttf");
+}
+
+//
+
+/* Declare all the variables here */
+
+$bg-color-light: #fff;
+$sidebar-bg-light: #002340;
+$button-text-light: #aca8a7;
+$container-bg-light: #f7eb80;
+$wrapper-bg-light: #fff;
+$bg-color-dark: #fff;
+$sidebar-bg-dark: #000;
+$button-text-dark: #481b16;
+$container-bg-dark: #e4ada7;
+$wrapper-bg-dark: #000;
+
+/* Global CSS here */
+
+body {
+    // overflow-x: hidden;
+    overflow: hidden;
+}
+
+th:before,
+th:after {
+    content: "" !important;
+}
+
+@font-face {
+    font-family: "Roboto-Light";
+    /* Not used */
+    src: url("../src/assets/fonts/Roboto-Light.ttf");
+}
+
+@font-face {
+    font-family: "Roboto-Regular";
+    /* Most used */
+    src: url("../src/assets/fonts/Roboto-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Roboto-Medium";
+    /* Less used */
+    src: url("../src/assets/fonts/Roboto-Medium.ttf");
+}
+
+@font-face {
+    font-family: "Roboto-Bold";
+    /* Used to highlight as well as indicate selected text */
+    src: url("../src/assets/fonts/Roboto-Bold.ttf");
+}
+
+@font-face {
+    font-family: "Roboto-Black";
+    /* Not used */
+    src: url("../src/assets/fonts/Roboto-Black.ttf");
+}
+
+.cdes-typeface-light {
+    font-family: "Roboto-Light";
+}
+
+.cdes-typeface-regular {
+    font-family: "Roboto-Regular";
+}
+
+.cdes-typeface-medium {
+    font-family: "Roboto-Medium";
+}
+
+.cdes-typeface-bold {
+    font-family: "Roboto-Bold";
+}
+
+.cdes-typeface-black {
+    font-family: "Roboto-Black";
+}
+
+.error-msg {
+    color: #dc1523;
+}
+
+.required-symbol:after {
+    content: "*";
+    color: #dc1523;
+}
+
+ng-select.is-invalid~.invalid-feedback {
+    display: block;
+}
+
+ng-select.form-submitted.is-invalid .ng-select-container {
+    border-color: #dc1523;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 3px #fde6e8;
+}
+
+.with-rows div.dataTables_wrapper div.dataTables_processing {
+    display: none !important;
+}
+
+.vendor-id-help .modal-dialog.modal-lg {
+    min-width: 70%;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.no-table-rows div.paging_simple_numbers {
+    display: none !important;
+}
+
+.checkbox {
+    display: block;
+    position: relative;
+    padding-left: 25px;
+    // margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
+/* Hide the browser's default checkbox */
+
+.checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+
+/* Create a custom checkbox */
+
+.checkmark {
+    position: absolute;
+    top: 3px;
+    left: 0;
+    height: 16px;
+    width: 16px;
+    background-color: #fff;
+    border: 2px solid #585858;
+}
+
+
+/* On mouse-over, add a grey background color */
+
+.checkbox:hover input~.checkmark {
+    background-color: #fff;
+    border: 2px solid #585858;
+}
+
+
+/* When the checkbox is checked, add a blue background */
+
+.checkbox input:checked~.checkmark {
+    background-color: #dc1523;
+    border: 0px !important;
+}
+
+
+/* Create the checkmark/indicator (hidden when not checked) */
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+
+/* Show the checkmark when checked */
+
+.checkbox input:checked~.checkmark:after {
+    display: block;
+}
+
+
+/* Style the checkmark/indicator */
+
+.checkbox .checkmark:after {
+    left: 5px;
+    top: 2px;
+    width: 6px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+// ----------------------------
+.radio-button {
+    display: block;
+    position: relative;
+    padding: 0px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    margin-top: 5px;
+    // font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
+/* Hide the browser's default radio button */
+
+.radio-button input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+
+/* Create a custom radio button */
+
+.checkmark-radio {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 16px;
+    width: 16px;
+    background-color: #fff;
+    border-radius: 50%;
+    border: 2px solid #585858;
+}
+
+
+/* On mouse-over, add a grey background color */
+
+.radio-button:hover input~.checkmark-radio {
+    background-color: #fff;
+}
+
+
+/* When the radio button is checked, add a blue background */
+
+.radio-button input:checked~.checkmark-radio {
+    background-color: #fff;
+    border: 2px solid #dc1523;
+}
+
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+
+.checkmark-radio:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+
+/* Show the indicator (dot/circle) when checked */
+
+.radio-button input:checked~.checkmark-radio:after {
+    display: block;
+}
+
+
+/* Style the indicator (dot/circle) */
+
+.radio-button .checkmark-radio:after {
+    top: 2px;
+    left: 2px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #dc1523;
+}
+
+.list-group-item {
+    padding: 5px !important;
+    display: block;
+}
+
+.callAllocation {
+    width: 40%;
+    margin-top: 10%;
+    margin-left: 30%;
+}
+
+.icon-click {
+    font-size: 17px !important;
+}
+
+.refresh-btn {
+    color: #dc1523 !important;
+}
+
+.download-btn {
+    color: #dc1523;
+    text-decoration: underline;
+}
+
+.pm-align-width {
+    min-width: 260px !important;
+}
+
+.spare-align-width {
+    min-width: 140px !important;
+}
+
+.scroll-table-header {
+    overflow: auto !important;
+}
+
+
+/* DataTable Styles*/
+
+.dataTables_wrapper.no-footer .dataTables_scrollBody {
+    border-bottom: 1px solid #fff !important;
+}
+
+div.dataTables_scrollBody>table>tbody>tr>td {
+    padding-left: 16px !important;
+    &.table-cell,
+    &.table-cell-action {
+        cursor: default;
+    }
+    &.table-cell.row-click-active,
+    .clickable-element {
+        cursor: pointer;
+    }
+}
+
+div.dataTables_scrollBody>table {
+    padding-top: 0 !important;
+}
+
+.dataTables_scroll .dataTables_scrollHeadInner {
+    min-width: 100%;
+}
+
+.table-filter-body {
+    max-height: calc(100vh - 210px);
+    overflow: auto;
+}
+
+.color-light-gray {
+    background-color: #e5e5e5;
+}
+
+span.ph-item {
+    min-height: 20px;
+    pointer-events: none;
+}
+
+.cell-processing .form-control,
+.cell-processing .checkbox-span {
+    display: none;
+}
+
+.mini-sidebar .aside-menu .stacked-menu ul.menu li.menu-item a.active-link {
+    background-color: unset !important;
+}
+
+
+/* Mixin functions here */
+
+@mixin applyTheme($theme-name,
+$container-bg,
+$left-bg,
+$right-bg,
+$innertext,
+$button-bg,
+$sidebar-bg,
+$wrapper-bg) {
+    .#{$theme-name} {
+        .layout-body {
+            .app-aside-light {
+                background-color: $sidebar-bg;
+                .menu-text,
+                .menu-link,
+                .menu-link:after {
+                    color: $innertext !important;
+                }
+                .aside-footer {
+                    background-color: #ffffff26;
+                }
+                .label-footer {
+                    background-color: unset !important;
+                    display: inline-block;
+                    color: white;
+                    padding-left: 10px;
+                    font-size: 14px;
+                }
+                .menu-link:hover {
+                    background-color: #1e4a6f;
+                }
+                .active-link,
+                .active-link:focus {
+                    background-color: #1e4a6f !important;
+                }
+            }
+            .btn-light {
+                background-color: $button-bg;
+                color: $innertext !important;
+            }
+            table {
+                tr {
+                    background-color: none;
+                }
+            }
+            .mini-sidebar {
+                .label-footer {
+                    display: none !important;
+                }
+                .menu-link:after {
+                    display: contents !important;
+                }
+                .right-directing {
+                    display: inline !important;
+                }
+                .left-directing {
+                    display: none !important;
+                }
+            }
+            .wrapper {
+                background-color: $wrapper-bg-light;
+            }
+            .header-navigator {
+                height: 50px;
+                background-color: #002340;
+            }
+            .arrow-back {
+                color: #fff;
+                font-size: 17px;
+                padding: 15px;
+                cursor: pointer;
+            }
+            .footer-navigator {
+                position: absolute;
+                bottom: 0px;
+                background-color: #eff2f3;
+                padding: 10px;
+            }
+            .header-text {
+                color: #fff;
+                font-size: 25px !important;
+                padding: 6px;
+            }
+            .text-theme {
+                color: #dc1523;
+            }
+            .icon-success {
+                color: #198038;
+                font-size: 1.125rem;
+            }
+            .icon-error {
+                color: #da1e28;
+                font-size: 1.125rem;
+            }
+            .img-align {
+                text-align: center !important;
+                padding: 20px !important;
+            }
+            .menu-text {
+                padding-left: 32px;
+            }
+            .menu-icon {
+                text-align: center;
+                font-size: 1.125rem;
+                color: #fff;
+                position: absolute;
+            }
+            .label-action {
+                color: #da1e28;
+                padding: 3px;
+            }
+            .coco-cola-theme-color {
+                color: #dc1523;
+                cursor: pointer;
+            }
+            .cell-click {
+                color: #dc1523;
+                cursor: pointer;
+                text-decoration: underline;
+            }
+            .label-red {
+                color: #dc1523;
+                cursor: pointer;
+            }
+            /* The switch - the box around the slider */
+            .switch {
+                position: relative;
+                display: inline-block;
+                width: 50px;
+                height: 22px;
+            }
+            /* Hide default HTML checkbox */
+            .switch input {
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+            /* The slider */
+            .slider {
+                position: absolute;
+                cursor: pointer;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: #ccc;
+                -webkit-transition: 0.4s;
+                transition: 0.4s;
+            }
+            .slider:before {
+                position: absolute;
+                content: "";
+                height: 15px;
+                width: 15px;
+                left: 4px;
+                bottom: 4px;
+                background-color: white;
+                -webkit-transition: 0.4s;
+                transition: 0.4s;
+            }
+            input:checked+.slider {
+                background-color: #dc1523;
+            }
+            input:focus+.slider {
+                box-shadow: 0 0 1px #dc1523;
+            }
+            input:checked+.slider:before {
+                -webkit-transform: translateX(26px);
+                -ms-transform: translateX(26px);
+                transform: translateX(26px);
+            }
+            /* Rounded sliders */
+            .slider.round {
+                border-radius: 34px;
+            }
+            .slider.round:before {
+                border-radius: 50%;
+            }
+             ::-webkit-scrollbar-track {
+                box-shadow: inset 0 0 5px #605c5c !important;
+            }
+             ::-webkit-scrollbar-thumb {
+                background: grey !important;
+            }
+             ::-webkit-scrollbar {
+                width: 7px !important;
+                height: 7px;
+            }
+        }
+    }
+}
+
+app-multipart-uploader.is-invalid~.invalid-feedback {
+    display: block;
+}
+
+
+/* Functions calls here */
+
+@include applyTheme( theme-1,
+$container-bg-light,
+#497265,
+#82aa91,
+$bg-color-light,
+$button-text-light,
+$sidebar-bg-light,
+$wrapper-bg-dark);
+@include applyTheme( theme-2,
+$container-bg-dark,
+#d88880,
+#cc6359,
+$bg-color-dark,
+$button-text-dark,
+$sidebar-bg-dark,
+$wrapper-bg-dark);
+.pointer-null {
+    pointer-events: none !important;
+    color: #9a9696 !important;
+}
+
+.page-content {
+    height: calc(100vh - 130px);
+    overflow-y: auto;
+}
+
+.text-center {
+    text-align: center !important;
+}
+
+.provider-container {
+    padding-top: 1rem;
+    padding-left: 1rem;
+    height: calc(100vh - 148px);
+    overflow-y: auto;
+    padding-bottom: 2rem;
+}
+
+.page-info {
+    padding: 0.5rem;
+    background: #c8dbe282;
+}
+
+.label-size {
+    font-size: 0.75rem !important;
+}
+
+.highlight-text {
+    background-color: #dc1523;
+}
+
+.align-inline {
+    margin-top: 5px;
+}
+
+.sharedModal .modal-dialog {
+    width: 70% !important;
+}
+
+.sharedModal .modal-lg {
+    max-width: 1600px !important;
+}
+
+.spare-list-error-modal .modal-dialog {
+    min-width: 70%;
+}
+
+.page-body {
+    padding-top: 1rem;
+    padding-left: 1rem;
+    height: calc(100vh - 98px);
+    overflow-y: auto;
+    padding-bottom: 2rem;
+}
+
+.spare-btn-padding {
+    padding: 0.5rem !important;
+}
+
+
+/* media queries for service provider card body */
+
+@media only screen and (max-height: 789px) {
+    .card-align {
+        max-width: 33% !important;
+    }
+}
+
+@media only screen and (max-height: 717px) {
+    .card-align {
+        max-width: 38% !important;
+    }
+}
+
+@media only screen and (max-height: 631px) {
+    .card-align {
+        max-width: 50% !important;
+    }
+}
+
+@media only screen and (max-height: 526px) {
+    .card-align {
+        max-width: 68% !important;
+    }
+}
+
+@media only screen and (max-width: 1564px) {
+    .card-align {
+        max-width: 33% !important;
+    }
+}
+
+@media only screen and (max-width: 1474px) {
+    .card-align {
+        max-width: 40% !important;
+    }
+}
+
+@media only screen and (max-width: 1305px) {
+    .card-align {
+        max-width: 48% !important;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .card-align {
+        max-width: 65% !important;
+    }
+}
+
+@media only screen and (max-width: 1030px) {
+    .card-align {
+        max-width: 85% !important;
+    }
+}
+
+@media only screen and (max-width: 960px) {
+    // body {
+    //   zoom: 0.8;
+    // }
+}
+
+.stock-reports-table cdk-virtual-scroll-viewport {
+    overflow-x: hidden !important;
+    height: calc(100vh - 360px) !important;
+}
+
+.disabled {
+    pointer-events: none;
+}
+
+.acl-group-url-matrix-table-cell-width {
+    max-width: 300px !important;
+    width: 300px !important;
+}
+
+.modal-stl .modal-sm {
+    max-width: 30%;
+}
+
+.activePointer {
+    pointer-events: pointer;
+}
+
+.boldFont {
+    font-weight: 600;
+}
+
+.table-cell-width {
+    min-width: 200px !important;
+    max-width: 200px !important;
+    word-break: break-all;
+}
+
+.table-cell-width-header {
+    min-width: 200px !important;
+    max-width: 200px !important;
+}
+
+.modal-bd-call .modal-lg {
+    max-width: 80%;
+}
+
+.reportClass {
+    min-width: 100px !important;
+    max-width: 100px !important;
+}
+
+.align-width-240 {
+    min-width: 240px !important;
+    max-width: 240px !important;
+}
+
+tbody td.color-green {
+    color: green;
+}
+
+.recovery-letter-cell-width {
+    min-width: 160px !important;
+}
+
+.table-cell-display-none {
+    display: none !important;
+}
+
+table.dataTable tbody tr.inactiveRow {
+    background-color: #e2e2e2;
+}
+
+.workBreakAll {
+    word-break: break-all;
+}
+
+.fa.color-red {
+    color: red;
+}
+
+.fa.color-green {
+    color: green;
+}
+
+.table-cell-width-header.removal-tracker {
+    min-width: 300px !important;
+    max-width: 300px !important;
+}
+
+.text-left {
+    text-align: left!important
+}
+
+.bg-color-red {
+    background: red !important;
+}
+
+.partition-header {
+    border-left: 1px solid black !important;
+}
+
+.text-color-red {
+    color: red !important;
+}
